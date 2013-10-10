@@ -1,0 +1,181 @@
+
+<style>
+.instagram-placeholder {
+
+float: left;
+
+margin-right: 20px;
+margin-left: 5em;
+margin-top: 20px;
+margin-bottom: 20px;
+border-style:solid;
+border-width:5px;
+
+}
+.instagram-placeholder:hover {
+margin-right: 20px;
+
+margin-left: 20px;
+margin-left: 5em;
+margin-top: 20px;
+margin-bottom: 20px;
+border-style:solid;
+border-width:5px;
+background: black;
+opacity: .7;  
+cursor: pointer; 
+}
+  #refresh {
+	margin-left: 39em;
+    background: lightblue;
+    
+    width: 70px;
+    text-align: center;
+
+    cursor: pointer;
+    border: 2px outset black;
+    font-weight: bolder;
+  }
+    #searchb {
+	margin-left: 39em;
+    background: lightblue;
+    
+    width: 70px;
+    text-align: center;
+
+    cursor: pointer;
+    border: 2px outset black;
+    font-weight: bolder;
+  }
+  #search {
+  	margin-left: 43.7em;
+	margin-bottom: 10px
+	}
+h1 {
+text-align: center;
+}
+
+</style>
+
+<h1>Instagram Search</h1>
+
+<br/>
+<input type="search" name="search" id="search" value="Hashtag" />
+
+<div id="searchb">
+Search
+</div>
+
+<br/>
+<div id="refresh">
+  New Search
+</div>
+<br/>
+
+
+
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+ <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+<div class="instagram"></div>
+
+<script>
+
+  
+  $(document).ready(function() {
+
+
+
+$( "#search" ).focus();
+$( "#refresh" ).click(function() {
+  
+  location.reload();
+});
+
+for ( var i = 0; i < 1; i++ ) {
+  
+$( "#searchb" ).click(function() {
+    var hi = $("#search").val();
+console.log(""+ hi +"");
+$(function() {
+
+    $.ajax({
+    	type: "GET",
+        dataType: "jsonp",
+        cache: false,
+        url: "https://api.instagram.com/v1/tags/"+ hi +"/media/recent?access_token=18360510.5b9e1e6.de870cc4d5344ffeaae178542029e98b",
+        success: function(data) {
+            for (var i = 0; i < 20; i++) {
+        $(".instagram").append("<div class='instagram-placeholder'><a target='_blank' href='" + data.data[i].link +"'><img class='instagram-image' src='" + data.data[i].images.low_resolution.url +"' /></a></div>");   
+      		
+			}     
+                            
+        }
+		
+    });
+});
+
+
+});
+
+}
+ });
+
+
+
+
+
+</script>
+<script>
+
+  
+ $(document).ready(function() {
+
+
+
+$( "#search" ).focus();
+$( "#refresh" ).click(function() {
+  
+  location.reload();
+});
+
+for ( var i = 0; i < 1; i++ ) {
+  
+$('#search').bind('keypress', function(e) {
+	if(e.keyCode==13){
+		// Enter pressed... do anything here...
+	
+    var hi = $("#search").val();
+console.log(""+ hi +"");
+$(function() {
+
+    $.ajax({
+    	type: "GET",
+        dataType: "jsonp",
+        cache: false,
+        url: "https://api.instagram.com/v1/tags/"+ hi +"/media/recent?access_token=18360510.5b9e1e6.de870cc4d5344ffeaae178542029e98b",
+        success: function(data) {
+            for (var i = 0; i < 20; i++) {
+        $(".instagram").append("<div class='instagram-placeholder'><a target='_blank' href='" + data.data[i].link +"'><img class='instagram-image' src='" + data.data[i].images.low_resolution.url +"' /></a></div>");   
+      		
+			}     
+                            
+        }
+		
+    });
+});
+
+}
+});
+
+}
+ });
+
+
+
+
+</script>
+<br/>
+
+
